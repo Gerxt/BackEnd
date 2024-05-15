@@ -1,4 +1,5 @@
 import culturemedia.repository.VideoRepository;
+import culturemedia.repository.ViewsRepository;
 
 import java.util.List;
 
@@ -6,10 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import culturemedia.model.Video;
-import culturemedia.repository.impl.VideoRepositoryImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import culturemedia.repository.impl.*;;
+import culturemedia.repository.impl.*;
+
+import culturemedia.exception.VideoNotFoundExeption;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import culturemedia.service.*;
+import culturemedia.service.impl.CultureMediaImpl;
 
 class VideoRepositoryTest 
 {
@@ -18,6 +23,7 @@ class VideoRepositoryTest
 
 	@BeforeEach
 	void init(){
+
 
 		videoRepository = new VideoRepositoryImpl();
 
@@ -64,5 +70,4 @@ class VideoRepositoryTest
 		List<Video> videos = videoRepository.find( 0.1, 0.3 );
 		assertEquals(0, videos.size());
 	}
-
 }

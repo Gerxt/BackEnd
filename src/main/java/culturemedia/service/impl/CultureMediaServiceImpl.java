@@ -10,38 +10,47 @@ import culturemedia.repository.ViewsRepository;
 import culturemedia.model.Video;
 import culturemedia.model.View;
 
+import culturemedia.exception.VideoNotFoundExeption;
 
-public class CultureMediaImpl implements CultureMediaService
-{
+public class CultureMediaServiceImpl implements CultureMediaService{
     private VideoRepository videoRepository;
     private ViewsRepository viewsRepository;
 
-    public CultureMediaImpl(VideoRepository videoRepository, ViewsRepository viewsRepository)
+    public CultureMediaServiceImpl(VideoRepository videoRepository, ViewsRepository viewsRepository) 
     {
         this.videoRepository = videoRepository;
         this.viewsRepository = viewsRepository;
     }
 
     @Override
-    public Video add(Video video) 
+    public Video add(Video video)
     {
         Video videoAdd = videoRepository.save(video);
         return videoAdd;
     }
 
     @Override
-    public View add(View view) 
+    public View add(View view)
     {
         View viewAdd = viewsRepository.save(view);
         return viewAdd;
     }
 
     @Override
-    public List<Video> ListAllVideos() 
-    {
+    public List<Video> ListAllVideos() throws VideoNotFoundExeption
+     {
+    
         List<Video> videos = videoRepository.findAll();
-        return videos;
+        if(videos.isEmpty())
+
+        {
+            throw new VideoNotFoundExeption();
+        }
+
+        else
+
+        {
+            return videos;
+        }
     }
-    
-    
 }
