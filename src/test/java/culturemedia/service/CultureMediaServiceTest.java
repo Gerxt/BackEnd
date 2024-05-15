@@ -1,3 +1,4 @@
+package culturemedia.service;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;
 
@@ -13,11 +14,10 @@ import culturemedia.repository.impl.*;
 
 import culturemedia.exception.VideoNotFoundExeption;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import culturemedia.service.*;
-import culturemedia.service.impl.CultureMediaImpl;
+
 import culturemedia.service.impl.CultureMediaServiceImpl;
 
-class CultureMediaTest 
+class CultureMediaServiceTest 
 {
 
     private CultureMediaService cultureMediaService;
@@ -29,11 +29,15 @@ class CultureMediaTest
     Video VideoE = new Video("500", "The LEGO Movie", "_ _ _ _ _", 6.6);
     Video VideoF = new Video("500", "Song of the Sea", "_ _ _ _ _", 7.7);
 
+   
     @BeforeEach
     void init() {
         VideoRepository videoRepository = new VideoRepositoryImpl();
         ViewsRepository viewsRepository = new ViewsRepositoryImpl();
         cultureMediaService = new CultureMediaServiceImpl(videoRepository, viewsRepository);
+
+       
+
     }
 
     @Test
@@ -59,4 +63,54 @@ class CultureMediaTest
             assert(false);
         }
     }
+
+    @Test
+    void when_you_search_by_title_and_it_is_not_found_exception_VideoNotFoundExeption() {
+        assertThrows(VideoNotFoundExeption.class, () -> {
+            cultureMediaService.find("better luck for the next");
+        });
+    }
+
+    @Test
+    void when_you_search_by_title_and_you_are_successful() {
+        List<Video> videos = List.of(VideoA, VideoB, VideoC, VideoD, VideoE, VideoF);
+        
+        for ( Video video : videos ) {
+            cultureMediaService.add( video );
+        }
+
+        try {
+            List<Video> Videos = cultureMediaService.find("The");
+            assertEquals(3, Videos.size());
+            
+        } catch (VideoNotFoundExeption e) {
+            assert(false);
+        }    
+    }
+
+
+
+    @Test 
+    void when_you_search_by_forDuration_and_it_is_not_found_exception_VideoNotFoundExeption() {
+        assertThrows(VideoNotFoundExeption.class, () -> {
+            cultureMediaService.find(0.002, 0.3);
+        });
+    }
+
+    @Test
+    void when_find_forDuration_should_be_returned_succesfully() {
+        List<Video> videos = List.of(VideoA, VideoB, VideoC, VideoD, VideoE, VideoF);
+        
+        for ( Video video : videos ) {
+            cultureMediaService.add( video );
+        }
+
+        try {
+            List<Video> Videos = cultureMediaService.find(3.3, 6.6);
+            assertEquals(4, Videos.size());
+        } catch (VideoNotFoundExeption e) {
+            assert(false);
+        }
+    }
+
 }
