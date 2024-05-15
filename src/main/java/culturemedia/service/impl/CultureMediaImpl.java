@@ -29,7 +29,7 @@ public class CultureMediaImpl implements CultureMediaService
     @Override
     public View add(View view) 
     {
-        View viewAdd = viewRepository.add(view);
+        View viewAdd = viewRepository.save(view);
         return viewAdd;
     }
 
