@@ -109,7 +109,7 @@ class CultureMediaServiceTest
     @Test
     void when_find_forDuration_should_be_returned_succesfully()  throws VideoNotFoundExeption{
         mockFindTime(0.0, 7.7, List.of( VideoA, VideoB, VideoC, VideoD, VideoE, VideoF));
-        List<Video> videos = cultureMediaService.find(0.0, 2.3);
+        List<Video> videos = cultureMediaService.find(0.0, 7.7);
         assertEquals(6, videos.size());
     }
 
