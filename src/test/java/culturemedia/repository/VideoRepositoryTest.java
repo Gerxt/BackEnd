@@ -1,3 +1,4 @@
+package culturemedia.repository;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;
 
