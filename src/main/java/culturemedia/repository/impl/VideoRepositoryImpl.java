@@ -9,12 +9,14 @@ public class VideoRepositoryImpl implements VideoRepository {
 
 	private final List<Video> videos;
 
-	public VideoRepositoryImpl() {
+	public VideoRepositoryImpl() 
+	{
 		videos = new ArrayList<>();
 	}
 
 	@Override
-	public List<Video> findAll() {
+	public List<Video> findAll() 
+	{
 		return videos;
 	}
 
@@ -27,10 +29,11 @@ public class VideoRepositoryImpl implements VideoRepository {
 	@Override
 	public List<Video> find(String title) 
     {
-		List<Video> filteredVideos = null;
+		List<Video> filteredVideos = new ArrayList<>();
 		for ( Video video : videos ) 
         {
-			if(title.equals( video.title() ))
+			
+			if(video.title().contains(title))
             {
 				if(filteredVideos == null)
                 {
@@ -48,7 +51,7 @@ public class VideoRepositoryImpl implements VideoRepository {
     {
 		List<Video> filteredVideos = new ArrayList<Video>();
 		for ( Video video : videos ) {
-			if(video.duration()> fromDuration && video.duration()< toDuration)
+			if(video.duration()>= fromDuration && video.duration()<= toDuration)
             {
 				filteredVideos.add(video);
 			}
