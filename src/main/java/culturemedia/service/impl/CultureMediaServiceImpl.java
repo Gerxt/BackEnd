@@ -2,8 +2,6 @@ package culturemedia.service.impl;
 
 import java.util.List;
 
-import org.mockito.internal.matchers.Null;
-
 import culturemedia.service.CultureMediaService;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;

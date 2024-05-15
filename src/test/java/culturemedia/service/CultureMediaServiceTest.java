@@ -19,11 +19,8 @@ import culturemedia.exception.VideoNotFoundExeption;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import culturemedia.service.CultureMediaService;
 import culturemedia.service.impl.CultureMediaServiceImpl;
 
-
-import culturemedia.repository.*;
 
 
 
